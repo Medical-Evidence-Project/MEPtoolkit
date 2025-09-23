@@ -1,16 +1,23 @@
 Package: MEPtoolkit
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Functions for the Medical Evidence Project
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Matthew", "Jané",
+      email = "matthew@medicalevidenceproject.org",
       role = c("aut", "cre")
-    )
+    ),
+    person(
+      "James", "Heathers",
+      email = "j@medicalevidenceproject.org",
+      role = c("aut", "cre")
+    ),
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: Functions for the Medical Evidence Project at the Center for Scientific Integrity
+License: Mozilla Public License Version 2.0
 Encoding: UTF-8
 LazyData: true
+Suggests:
+    roxygen2
+RoxygenNote: 7.3.3
