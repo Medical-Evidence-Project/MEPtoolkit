@@ -21,3 +21,4 @@ LazyData: true
 Suggests:
     roxygen2
 RoxygenNote: 7.3.3
+Imports: ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats, lubridate
