@@ -1,0 +1,23 @@
+Package: MEPtoolkit
+Type: Package
+Title: Functions for the Medical Evidence Project
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Matthew", "Jané",
+      email = "matthew@medicalevidenceproject.org",
+      role = c("aut", "cre")
+    ),
+    person(
+      "James", "Heathers",
+      email = "j@medicalevidenceproject.org",
+      role = c("aut", "cre")
+    ),
+  )
+Description: Functions for the Medical Evidence Project at the Center for Scientific Integrity
+License: Mozilla Public License Version 2.0
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    roxygen2
+RoxygenNote: 7.3.3
