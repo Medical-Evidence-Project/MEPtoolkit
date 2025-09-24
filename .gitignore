@@ -1,7 +1,11 @@
-.Rproj.user/
+# RStudio junk
+.Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# OS junk
 .DS_Store
-.Rproj.user
-.Rproj.user/*
+
+# (optional) catch nested .Rproj.user just in case
+**/.Rproj.user/
