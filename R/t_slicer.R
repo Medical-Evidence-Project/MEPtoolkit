@@ -29,64 +29,24 @@
 #' @export
 t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
 {
-  # Input validation, because users are clearly likely to try to input those as
-  # numbers instead of character strings
+  # Input validation
+  m1 <- validation_descriptive(m1, "m1")
+  s1 <- validation_descriptive(s1, "s1")
+  m2 <- validation_descriptive(m2, "m2")
+  s2 <- validation_descriptive(s2, "s2")
+  p <- validation_p(p)
 
-  # NOTE FOR LATER:
-  # Might be better to create a function for that, as this might be repeated
-  # a lot in several tools
-  if(!is.character(m1) || !is.character(s1) || !is.character(m2) ||
-     !is.character(s2) || !is.character(p)) {
-    stop("m1, s1, m2 and s2 must be character vectors.")
-  }
-  else {
-    suppressWarnings({
-        if(is.na(as.numeric(m1)) || is.na(as.numeric(s1)) ||
-           is.na(as.numeric(m2)) || is.na(as.numeric(s2)) ||
-           is.na(as.numeric(p))) {
-          stop("m1, s1, m2, s2 and p must be interpretable as numbers.")
-        }
-      }
-    )
-  }
+  m1_range <- c(m1$minimum, m1$maximum)
+  m1_num <- m1$original
+  s1_range <- c(s1$minimum, s1$maximum)
+  s1_num <- s1$original
+  m2_range <- c(m2$minimum, m2$maximum)
+  m2_num <- m2$original
+  s2_range <- c(s2$minimum, s2$maximum)
+  s2_num <- s2$original
+  p_range <- c(p$minimum, p$maximum)
+  p_num <- p$original
 
-  # grep the decimal places
-  decimal_places <- function(x) {
-    str_x <- as.character(x)
-    if (grepl("\\.", str_x)) {
-      return(nchar(strsplit(str_x, "\\.")[[1]][2]))
-    } else {
-      return(0)
-    }
-  }
-
-  m1_num <- as.numeric(m1)
-  s1_num <- as.numeric(s1)
-  m2_num <- as.numeric(m2)
-  s2_num <- as.numeric(s2)
-  p_num <- as.numeric(p)
-
-  # Get the possible range c(min, max) for means, SDs and p
-  m1_range <- c(
-    m1_num - 5*10^(-decimal_places(m1)-1),
-    m1_num + 5*10^(-decimal_places(m1)-1)
-  )
-  s1_range <- c(
-    s1_num - 5*10^(-decimal_places(s1)-1),
-    s1_num + 5*10^(-decimal_places(s1)-1)
-  )
-  m2_range <- c(
-    m2_num - 5*10^(-decimal_places(m2)-1),
-    m2_num + 5*10^(-decimal_places(m2)-1)
-  )
-  s2_range <- c(
-    s2_num - 5*10^(-decimal_places(s2)-1),
-    s2_num + 5*10^(-decimal_places(s2)-1)
-  )
-  p_range <- c(
-    p_num - 5*10^(-decimal_places(p)-1),
-    p_num + 5*10^(-decimal_places(p)-1)
-  )
   cases_grid <- expand.grid(m1 = m1_range, s1 = s1_range, m2 = m2_range, s2 = s2_range)
 
   # RIVETS values
@@ -113,8 +73,10 @@ t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
 
   rect_data <- data.frame(
     Reported = c("Student", "Welch"),
-    Size_min = c(0.65, 1.65),
-    Size_max = c(1.35, 2.35)
+    # Right now rect X coordinates are hard-coded, but would have to be changed
+    # if more tests are added
+    Xmin = c(0.65, 1.65),
+    Xmax = c(1.35, 2.35)
   )
 
   # Return value
@@ -146,7 +108,7 @@ t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
     ggnewscale::new_scale("fill") +
     geom_rect(
       data = rect_data,
-      aes(xmin=.data$Size_min, xmax=.data$Size_max, ymin=p_range[1],
+      aes(xmin=.data$Xmin, xmax=.data$Xmax, ymin=p_range[1],
           ymax=p_range[2], fill=.data$Reported),
       alpha=.5, color="black") +
     scale_fill_manual(
