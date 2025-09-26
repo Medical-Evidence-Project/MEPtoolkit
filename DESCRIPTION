@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Matthew", "Jané", email = "matthew@medicalevidenceproject.org", role = c("aut", "cre")),
     person("James", "Heathers", email = "j@medicalevidenceproject.org", role = "aut"),
-    person("Nathanael", "Larigaldie", email = "larigaldie.n@gmail.com", role = "aut"))
+    person("Nathanael", "Larigaldie", email = "nathanael@medicalevidenceproject.org", role = "aut"))
 Description: Functions for the Medical Evidence Project at the Center for Scientific Integrity.
 License: MPL-2.0
 Encoding: UTF-8
@@ -23,5 +23,7 @@ Imports:
     tibble,
     stringr,
     forcats,
-    lubridate
+    lubridate,
+    BSDA,
+    ggnewscale
 Config/testthat/edition: 3
