@@ -16,7 +16,7 @@ test_that("The 4 combinations of output are possible", {
   expect_false(res$Welch)
 })
 
-test_that("dicrete values work properly", {
+test_that("discrete values work properly", {
   res <- t_slicer("4", "1", 60, "2", "4", 60, ".05")
   expect_true(res$Student)
   expect_true(res$Welch)
