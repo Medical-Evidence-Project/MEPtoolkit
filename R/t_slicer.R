@@ -1,3 +1,89 @@
+#' R6 Class representing the results from a t_slicer call
+#'
+#' @description
+#' Mainly for pretty printing, but all output is available
+T_slicer_res <- R6::R6Class("T_slicer_res",
+            public = list(
+              #' @field Student_RIVETS p value from Student's t test using
+              #' RIVETS stats
+              Student_RIVETS = NULL,
+              #' @field Welch_RIVETS p value from Welch's t test using
+              #' RIVETS stats
+              Welch_RIVETS = NULL,
+              #' @field Student_min p value from Student's t test using
+              #' minimum possible values
+              Student_min = NULL,
+              #' @field Student_max p value from Student's t test using
+              #' maximum possible values
+              Student_max = NULL,
+              #' @field Welch_min p value from Welch's t test using
+              #' minimum possible values
+              Welch_min = NULL,
+              #' @field Welch_max p value from Welch's t test using
+              #' maximum possible values
+              Welch_max = NULL,
+              #' @field Student are statistics consistent with a Student's t
+              #' test?
+              Student = NULL,
+              #' @field Welch are statistics consistent with a Welch's t
+              #' test?
+              Welch = NULL,
+              #' @field Plot the resulting plot
+              Plot = NULL,
+              #' @description
+              #' Create a new T_slicer_res object
+              #' @param Student_RIVETS Student_RIVETS
+              #' @param Welch_RIVETS Welch_RIVETS
+              #' @param Student_min Student_min
+              #' @param Student_max Student_max
+              #' @param Welch_min Welch_min
+              #' @param Welch_max Welch_max
+              #' @param Student Student
+              #' @param Welch Welch
+              #' @param Plot Plot
+              #' @return A new `T_slicer_res` object
+              initialize = function(Student_RIVETS, Welch_RIVETS, Student_min,
+                                    Student_max, Welch_min, Welch_max,
+                                    Student, Welch, Plot) {
+                self$Student_RIVETS <- Student_RIVETS
+                self$Welch_RIVETS <- Welch_RIVETS
+                self$Student_min <- Student_min
+                self$Student_max <- Student_max
+                self$Welch_min <- Welch_min
+                self$Welch_max <- Welch_max
+                self$Student <- Student
+                self$Welch <- Welch
+                self$Plot <- Plot
+              },
+              #' @description
+              #' Pretty printing of t_slicer results
+              print = function() {
+                cat("Results from t_slicer\n")
+                cat("---------------------------------------\n")
+                cat("RIVETS p values:\n")
+                cat("      Student: p =", self$Student_RIVETS, "\n")
+                cat("      Welch:   p =", self$Welch_RIVETS, "\n\n")
+                cat("Min/max p values:\n")
+                cat("  - Minimum\n")
+                cat("      Student: p =", self$Student_min, "\n")
+                cat("      Welch:   p =", self$Welch_min, "\n\n")
+                cat("  - Maximum\n")
+                cat("      Student: p =", self$Student_max, "\n")
+                cat("      Welch:   p =", self$Welch_max, "\n")
+                cat("---------------------------------------\n")
+                cat("Student's t:  ", if(self$Student==TRUE) "Consistent\n"
+                    else "  Inconsistent\n")
+                cat("Welch's t:  ", if(self$Welch==TRUE) "Consistent\n"
+                    else "  Inconsistent\n")
+              },
+              #' @description
+              #' Plots the results
+              plot = function() {
+                plot(self$Plot)
+              }
+              )
+            )
+
 #' t_slicer
 #'
 #' Checks if a t test could be a Welch or a Student test (useful for cases
@@ -21,20 +107,22 @@
 #' @param s2 character string. The reported standard deviation of the second group
 #' @param n2 A number. The sample size of the second group
 #' @param p A character string. The reported p value
-#' @return A list of Booleans for each test (TRUE for a match, FALSE for a mismatch)
+#' @param output A logical.
+#' @return A T_slicer_res object. Contains logicals to represent the consistency
+#' of inputs with both tests, min/max/RIVETS p values, and a plot
 #' @examples
 #' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08")
 #' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02")
 #'
 #' @export
-t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
+t_slicer <- function (m1, s1, n1, m2, s2, n2, p, output = FALSE)
 {
   # Input validation
-  m1 <- validation_descriptive(m1, "m1")
-  s1 <- validation_descriptive(s1, "s1")
-  m2 <- validation_descriptive(m2, "m2")
-  s2 <- validation_descriptive(s2, "s2")
-  p <- validation_p(p)
+  m1 <- validate_descriptive(m1, "m1")
+  s1 <- validate_descriptive(s1, "s1")
+  m2 <- validate_descriptive(m2, "m2")
+  s2 <- validate_descriptive(s2, "s2")
+  p <- validate_p(p)
 
   m1_range <- c(m1$minimum, m1$maximum)
   m1_num <- m1$original
@@ -61,8 +149,6 @@ t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
     p_twelch_grid <- c(p_twelch_grid, BSDA::tsum.test(mean.x = cases_grid[i, "m1"], s.x = cases_grid[i, "s1"], n.x = n1, mean.y = cases_grid[i, "m2"], s.y = cases_grid[i, "s2"], n.y = n2, var.equal = FALSE)$p.value)
     p_tstudent_grid <- c(p_tstudent_grid, BSDA::tsum.test(mean.x = cases_grid[i, "m1"], s.x = cases_grid[i, "s1"], n.x = n1, mean.y = cases_grid[i, "m2"], s.y = cases_grid[i, "s2"], n.y = n2, var.equal = TRUE)$p.value)
   }
-  print(max(p_twelch_grid))
-  print(max(p_tstudent_grid))
 
   # Plot
   plot_data <- data.frame(
@@ -79,18 +165,17 @@ t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
     Xmax = c(1.35, 2.35)
   )
 
-  # Return value
-  result <- list(Student = FALSE, Welch = FALSE)
-
+  Student <- FALSE
+  Welch <- FALSE
   if(p_range[1] <= max(p_tstudent_grid) && p_range[2] >= min(p_tstudent_grid)) {
     color_rect_student <- "green"
-    result$Student <- TRUE
+    Student <- TRUE
   }
   else
     color_rect_student <- "red"
   if(p_range[1] <= max(p_twelch_grid) && p_range[2] >= min(p_twelch_grid)) {
     color_rect_welch <- "green"
-    result$Welch <- TRUE
+    Welch <- TRUE
   }
   else
     color_rect_welch <- "red"
@@ -117,6 +202,21 @@ t_slicer <- function (m1,s1,n1,m2,s2,n2,p)
     theme(axis.text = element_text(size=12),
           axis.title = element_text(size=13, face="bold"))
 
-  plot(p)
+  # Return value
+  result <- T_slicer_res$new(Student_RIVETS = tstudent$p.value,
+                             Student = Student, Welch = Welch,
+                             Welch_max = max(p_twelch_grid),
+                             Welch_RIVETS = twelch$p.value,
+                             Welch_min = min(p_twelch_grid),
+                             Student_max = max(p_tstudent_grid),
+                             Student_min = min(p_tstudent_grid),
+                             Plot = p)
+
+  if(output == TRUE)
+  {
+    plot(result)
+    print(result)
+  }
+
   return(result)
 }

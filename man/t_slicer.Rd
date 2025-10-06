@@ -4,7 +4,7 @@
 \alias{t_slicer}
 \title{t_slicer}
 \usage{
-t_slicer(m1, s1, n1, m2, s2, n2, p)
+t_slicer(m1, s1, n1, m2, s2, n2, p, output = FALSE)
 }
 \arguments{
 \item{m1}{A character string. The reported mean of the first group}
@@ -20,9 +20,12 @@ t_slicer(m1, s1, n1, m2, s2, n2, p)
 \item{n2}{A number. The sample size of the second group}
 
 \item{p}{A character string. The reported p value}
+
+\item{output}{A logical.}
 }
 \value{
-A list of Booleans for each test (TRUE for a match, FALSE for a mismatch)
+A T_slicer_res object. Contains logicals to represent the consistency
+of inputs with both tests, min/max/RIVETS p values, and a plot
 }
 \description{
 Checks if a t test could be a Welch or a Student test (useful for cases
