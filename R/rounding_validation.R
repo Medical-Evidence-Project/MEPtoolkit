@@ -15,7 +15,7 @@ decimal_places <- function(x) {
     return(0)
 }
 
-#' validation_descriptive
+#' validate_descriptive
 #'
 #' Validates a descriptive statistic: checks it is a string that can be
 #' converted to a number, and returns the possible range of values if it was
@@ -26,8 +26,8 @@ decimal_places <- function(x) {
 #' @return A list of numbers: the possible range of values (minimum, original
 #' and maximum)
 #' @examples
-#' validation_descriptive("2.14", "m1")
-validation_descriptive <- function (statistic, name)
+#' validate_descriptive("2.14", "m1")
+validate_descriptive <- function (statistic, name)
 {
   if(!is.character(statistic)) {
     stop(paste(name, "must be a character string."))
@@ -49,7 +49,7 @@ validation_descriptive <- function (statistic, name)
   return(statistic_range)
 }
 
-#' validation_descriptive
+#' validate_p
 #'
 #' Validates a p statistic: checks it is a string that can be
 #' converted to a number, and returns the possible range of values if it was
@@ -61,11 +61,11 @@ validation_descriptive <- function (statistic, name)
 #' @return A list of numbers: the possible range of values (minimum, original
 #' and maximum)
 #' @examples
-#' validation_p(".14")
+#' validate_p(".14")
 #' p_value <- ".25"
-#' validation_p(p_value, "p_value")
-#' validation_p("<.001")
-validation_p <- function(p, name = "p")
+#' validate_p(p_value, "p_value")
+#' validate_p("<.001")
+validate_p <- function(p, name = "p")
 {
   if(!is.character(p)) {
     stop(paste(name, "must be a character string."))
