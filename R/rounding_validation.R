@@ -22,13 +22,15 @@ decimal_places <- function(x) {
 #' rounded
 #'
 #' @param statistic Character string. The statistic to validate
-#' @param name Character string. The name of the variable (for error output)
 #' @return A list of numbers: the possible range of values (minimum, original
 #' and maximum)
 #' @examples
-#' validate_descriptive("2.14", "m1")
-validate_descriptive <- function (statistic, name)
+#' validate_descriptive("2.14")
+validate_descriptive <- function (statistic)
 {
+  name <- substitute(statistic)
+  if(typeof(name) != "symbol")
+    name <- "statistic"
   if(!is.character(statistic)) {
     stop(paste(name, "must be a character string."))
   }
@@ -56,17 +58,16 @@ validate_descriptive <- function (statistic, name)
 #' rounded
 #'
 #' @param p Character string. The p value to validate
-#' @param name Character string. Optional. The name of the variable
-#' (for error output)
 #' @return A list of numbers: the possible range of values (minimum, original
 #' and maximum)
 #' @examples
 #' validate_p(".14")
-#' p_value <- ".25"
-#' validate_p(p_value, "p_value")
 #' validate_p("<.001")
-validate_p <- function(p, name = "p")
+validate_p <- function(p)
 {
+  name <- substitute(p)
+  if(typeof(name) != "symbol")
+    name <- "p"
   if(!is.character(p)) {
     stop(paste(name, "must be a character string."))
   }
