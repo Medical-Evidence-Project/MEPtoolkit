@@ -4,13 +4,10 @@
 \alias{validate_p}
 \title{validate_p}
 \usage{
-validate_p(p, name = "p")
+validate_p(p)
 }
 \arguments{
 \item{p}{Character string. The p value to validate}
-
-\item{name}{Character string. Optional. The name of the variable
-(for error output)}
 }
 \value{
 A list of numbers: the possible range of values (minimum, original
@@ -23,7 +20,5 @@ rounded
 }
 \examples{
 validate_p(".14")
-p_value <- ".25"
-validate_p(p_value, "p_value")
 validate_p("<.001")
 }

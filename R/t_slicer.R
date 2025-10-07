@@ -118,10 +118,10 @@ T_slicer_res <- R6::R6Class("T_slicer_res",
 t_slicer <- function (m1, s1, n1, m2, s2, n2, p, output = FALSE)
 {
   # Input validation
-  m1 <- validate_descriptive(m1, "m1")
-  s1 <- validate_descriptive(s1, "s1")
-  m2 <- validate_descriptive(m2, "m2")
-  s2 <- validate_descriptive(s2, "s2")
+  m1 <- validate_descriptive(m1)
+  s1 <- validate_descriptive(s1)
+  m2 <- validate_descriptive(m2)
+  s2 <- validate_descriptive(s2)
   p <- validate_p(p)
 
   m1_range <- c(m1$minimum, m1$maximum)

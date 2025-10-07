@@ -4,12 +4,10 @@
 \alias{validate_descriptive}
 \title{validate_descriptive}
 \usage{
-validate_descriptive(statistic, name)
+validate_descriptive(statistic)
 }
 \arguments{
 \item{statistic}{Character string. The statistic to validate}
-
-\item{name}{Character string. The name of the variable (for error output)}
 }
 \value{
 A list of numbers: the possible range of values (minimum, original
@@ -21,5 +19,5 @@ converted to a number, and returns the possible range of values if it was
 rounded
 }
 \examples{
-validate_descriptive("2.14", "m1")
+validate_descriptive("2.14")
 }
