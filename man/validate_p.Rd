@@ -2,23 +2,25 @@
 % Please edit documentation in R/rounding_validation.R
 \name{validate_p}
 \alias{validate_p}
-\title{validate_p}
+\title{Validate a p statistic}
 \usage{
-validate_p(p)
+validate_p(p, allow_na = FALSE)
 }
 \arguments{
-\item{p}{Character string. The p value to validate}
+\item{p}{Character string or vector of strings. The p value(s) to validate}
+
+\item{allow_na}{Logical. Allows the use of NA values
+(returns NA for min/original/max)}
 }
 \value{
 A list of numbers: the possible range of values (minimum, original
 and maximum)
 }
 \description{
-Validates a p statistic: checks it is a string that can be
-converted to a number, and returns the possible range of values if it was
-rounded
+Checks it is a string that can be converted to a number, and returns the
+possible range of values before rounding
 }
 \examples{
 validate_p(".14")
-validate_p("<.001")
+validate_p(c(".14", "<.001", NA, ".58"), allow_na = TRUE)
 }

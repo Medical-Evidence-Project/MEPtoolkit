@@ -84,7 +84,7 @@ T_slicer_res <- R6::R6Class("T_slicer_res",
               )
             )
 
-#' t_slicer
+#' Slice t tests
 #'
 #' Checks if a t test could be a Welch or a Student test (useful for cases
 #' when it is not explicitly stated)
@@ -107,12 +107,13 @@ T_slicer_res <- R6::R6Class("T_slicer_res",
 #' @param s2 character string. The reported standard deviation of the second group
 #' @param n2 A number. The sample size of the second group
 #' @param p A character string. The reported p value
-#' @param output A logical.
+#' @param output A logical. Optional (default = FALSE). Determines if the
+#' function should print and plot its output before returning it
 #' @return A T_slicer_res object. Contains logicals to represent the consistency
 #' of inputs with both tests, min/max/RIVETS p values, and a plot
 #' @examples
-#' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08")
-#' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02")
+#' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08", TRUE)
+#' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02", TRUE)
 #'
 #' @export
 t_slicer <- function (m1, s1, n1, m2, s2, n2, p, output = FALSE)
