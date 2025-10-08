@@ -2,7 +2,7 @@
 % Please edit documentation in R/t_slicer.R
 \name{t_slicer}
 \alias{t_slicer}
-\title{t_slicer}
+\title{Slice t tests}
 \usage{
 t_slicer(m1, s1, n1, m2, s2, n2, p, output = FALSE)
 }
@@ -21,7 +21,8 @@ t_slicer(m1, s1, n1, m2, s2, n2, p, output = FALSE)
 
 \item{p}{A character string. The reported p value}
 
-\item{output}{A logical.}
+\item{output}{A logical. Optional (default = FALSE). Determines if the
+function should print and plot its output before returning it}
 }
 \value{
 A T_slicer_res object. Contains logicals to represent the consistency
@@ -44,7 +45,7 @@ have been rounded up or down
 Plots a graph on top of the return value
 }
 \examples{
-t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08")
-t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02")
+t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08", TRUE)
+t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02", TRUE)
 
 }

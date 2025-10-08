@@ -2,22 +2,28 @@
 % Please edit documentation in R/rounding_validation.R
 \name{validate_descriptive}
 \alias{validate_descriptive}
-\title{validate_descriptive}
+\title{Validate a descriptive statistic}
 \usage{
-validate_descriptive(statistic)
+validate_descriptive(statistic, allow_na = FALSE)
 }
 \arguments{
-\item{statistic}{Character string. The statistic to validate}
+\item{statistic}{Character string or vector of strings.
+The statistic(s) to validate}
+
+\item{allow_na}{Logical. Allows the use of NA values
+(returns NA for min/original/max)}
 }
 \value{
 A list of numbers: the possible range of values (minimum, original
 and maximum)
 }
 \description{
-Validates a descriptive statistic: checks it is a string that can be
-converted to a number, and returns the possible range of values if it was
-rounded
+This function checks if a statistic is a string or vector of
+strings that can be converted to numbers, and returns the possible range of
+values before rounding
 }
 \examples{
 validate_descriptive("2.14")
+validate_descriptive(c("2.14", "3.2"))
+validate_descriptive(c("2.14", NA, "3.2"), allow_na = TRUE)
 }

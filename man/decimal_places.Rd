@@ -2,21 +2,23 @@
 % Please edit documentation in R/rounding_validation.R
 \name{decimal_places}
 \alias{decimal_places}
-\title{decimal_places}
+\title{Find and return the number of decimal places on a statistic}
 \usage{
-decimal_places(x)
+decimal_places(statistic)
 }
 \arguments{
-\item{x}{Character string. The statistic to examine}
+\item{statistic}{Number or (ideally) character vectors. The statistic to
+examine}
 }
 \value{
 The number of decimal places
 }
 \description{
-Finds and returns the number of decimal places on a statistic
+Find and return the number of decimal places on a statistic
 }
 \examples{
 decimal_places("3")
 decimal_places(".984")
 decimal_places("2.00")
+decimal_places(c("3.14", NA, "6.8"))
 }
