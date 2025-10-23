@@ -115,6 +115,7 @@ T_slicer_res <- R6::R6Class("T_slicer_res",
 #' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08", TRUE)
 #' t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02", TRUE)
 #'
+#' @import dplyr ggplot2
 #' @export
 t_slicer <- function (m1, s1, n1, m2, s2, n2, p, output = FALSE)
 {

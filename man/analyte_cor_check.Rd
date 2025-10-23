@@ -2,7 +2,6 @@
 % Please edit documentation in R/analyte_cor_check.R
 \name{analyte_cor_check}
 \alias{analyte_cor_check}
-\alias{print.analyte_cor_check}
 \title{Flag and quantify pre–post correlation vs analyte ceilings}
 \usage{
 analyte_cor_check(
@@ -20,10 +19,9 @@ analyte_cor_check(
   p = NULL,
   k = 1,
   use = c("pre", "post", "average"),
-  append = TRUE
+  append = FALSE,
+  output = FALSE
 )
-
-\method{print}{analyte_cor_check}(x, digits = 3, p_digits = 3, max_rows = 20, ...)
 }
 \arguments{
 \item{data}{Optional data.frame with columns; you may pass bare/quoted column names.}
@@ -45,20 +43,11 @@ may be columns in `data`. If numeric, coerced to character.}
 \item{use}{Which study CVT to use in the ceiling calculation: `"pre"`, `"post"`,
 or `"average"`.}
 
-\item{append}{Logical. If TRUE (default) and `data` is supplied, return `data`
+\item{append}{Logical. If TRUE and `data` is supplied, return `data`
 with new columns appended; else return only the new columns (and include
 `analyte` and `n_used` so printing works).}
 
-\item{x}{An object of class \code{analyte_cor_check}, as returned by
-\code{analyte_cor_check()}.}
-
-\item{digits}{Integer. Decimal places for correlations/ceilings. Default 3.}
-
-\item{p_digits}{Integer. Decimal places for p-values. Default 3.}
-
-\item{max_rows}{Integer. Max rows to display. Default 20.}
-
-\item{...}{Unused; present for S3 method compatibility.}
+\item{output}{Logical. If \code{TRUE}, also outputs a summary of results in the console.}
 }
 \value{
 A data.frame containing (or appending):
@@ -81,10 +70,6 @@ For each row/case this function:
     (character) is supplied, its LOWER rounding bound is used;
 (3) computes one-tailed probabilities that a correlation >= `r_obs` would be seen
     if the true correlation equaled each ceiling (Fisher z, n > 3).
-
-Produces a compact, human-readable table for one or more cases from
-\code{analyte_cor_check()}, showing the observed lower-bound correlation used
-for flagging, each analyte ceiling, flags, and one-tailed probabilities.
 }
 \details{
 Rounding-aware inputs: `m1, s1, m2, s2` must be character strings (e.g., "64.3")

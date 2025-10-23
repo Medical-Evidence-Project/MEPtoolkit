@@ -137,5 +137,6 @@ prepost_r(
 
 }
 \seealso{
-Paired \emph{t} relationships; summary-data meta-analysis for pre–post designs.
+Paired \emph{t} relationships; summary-data meta-analysis for
+pre–post designs.
 }

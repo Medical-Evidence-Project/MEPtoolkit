@@ -14,7 +14,8 @@ analyte_max_cor(
   use = c("pre", "post", "average"),
   data = NULL,
   append = FALSE,
-  out_cols = c("r_max_analytic", "r_max_total")
+  out_cols = c("cvi", "cva", "cvt", "cvw", "cvg", "r_max_analytic", "r_max_total"),
+  output = FALSE
 )
 }
 \arguments{
@@ -30,8 +31,10 @@ analyte_max_cor(
 
 \item{append}{Logical. If \code{TRUE} and \code{data} provided, append ceilings as columns.}
 
-\item{out_cols}{Length-2 character vector: names for analytic-only and total ceilings.
+\item{out_cols}{Length-7 character vector: names for analytic-only and total ceilings.
 Defaults to \code{c("r_max_analytic","r_max_total")}.}
+
+\item{output}{Logical. If \code{TRUE}, also outputs a summary of results in the console.}
 }
 \value{
 \itemize{
