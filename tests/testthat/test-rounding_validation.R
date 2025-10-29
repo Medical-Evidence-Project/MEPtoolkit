@@ -1,7 +1,7 @@
 test_that("demical_places returns the right number", {
-  expect_equal(decimal_places("1.234"), 3)
-  expect_equal(decimal_places("3"), 0)
-  expect_equal(decimal_places(".2"), 1)
+  expect_equal(decimal_place("1.234"), 3)
+  expect_equal(decimal_place("3"), 0)
+  expect_equal(decimal_place(".2"), 1)
 })
 
 test_that("validate_descriptive correctly stops when not a number+string (single

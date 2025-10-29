@@ -2,9 +2,12 @@
 
 export(analyte_cor_check)
 export(analyte_max_cor)
+export(decimal_place)
 export(prepost_r)
 export(prepost_r_RIVETS)
 export(t_slicer)
+export(validate_descriptive)
+export(validate_p)
 import(dplyr)
 import(ggplot2)
 import(rlang)
