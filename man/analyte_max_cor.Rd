@@ -32,19 +32,15 @@ analyte_max_cor(
 \item{append}{Logical. If \code{TRUE} and \code{data} provided, append ceilings as columns.}
 
 \item{out_cols}{Length-7 character vector: names for analytic-only and total ceilings.
-Defaults to \code{c("r_max_analytic","r_max_total")}.}
+Defaults to \code{c("cvi", "cva", "cvt", "cvw", "cvg", "r_max_analytic","r_max_total")}.}
 
 \item{output}{Logical. If \code{TRUE}, also outputs a summary of results in the console.}
 }
 \value{
 \itemize{
-  \item Single case (no \code{data}, \code{append = FALSE}): an object of class
-        \code{"analyte_max_cor"} with detailed components and a pretty printer.
-  \item Multiple cases, \code{append = FALSE}: a data.frame with columns
-        \code{case}, \code{analyte}, \code{cvi}, \code{cva}, \code{cvt}, \code{cvw}, \code{cvg},
-        \code{r_max_analytic}, \code{r_max_total}. It is tagged so that
-        \code{print.analyte_max_cor()} prints a compact table.
-  \item Multiple cases, \code{append = TRUE}: the input \code{data} with two new columns
+  \item if no \code{data} or \code{append = FALSE}: an object of class
+        \code{"Analyte_max_cor_res"} with detailed components and a pretty printer.
+  \item if \code{append = TRUE}: the input \code{data} with two new columns
         named by \code{out_cols}.
 }
 }

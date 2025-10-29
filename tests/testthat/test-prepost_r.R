@@ -34,6 +34,7 @@ test_that("correctly stops when dataframe argument is wrong", {
                    n = c(10, NA),
                    t  = c("3.00","2.40"),
                    stringsAsFactors = FALSE)
+  tst <- 1
 
   expect_error(prepost_r(data = df, s1 = s1, s2 = s2, t=tst, n=n),
                "Column `tst` not found in `data`")

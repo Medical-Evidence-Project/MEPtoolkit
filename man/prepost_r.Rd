@@ -17,9 +17,7 @@ prepost_r(
   p = NULL,
   data = NULL,
   append = FALSE,
-  out_col_min = "rho_prepost_min",
-  out_col_mid = "rho_prepost",
-  out_col_max = "rho_prepost_max",
+  out_cols = c("rho_prepost_min", "rho_prepost", "rho_prepost_max"),
   strict = FALSE,
   warn = TRUE
 )
@@ -60,7 +58,7 @@ prepost_r_RIVETS(
 
 \item{append}{Logical. If `TRUE` with `data`, append output columns; else return a data frame of results.}
 
-\item{out_col_min, out_col_mid, out_col_max}{Character. Output column names when `append = TRUE`
+\item{out_cols}{Character vector. Output column names when `append = TRUE`
 (defaults: `"rho_prepost_min"`, `"rho_prepost"`, `"rho_prepost_max"`).}
 
 \item{strict}{Logical. If `TRUE`, error out on underspecified rows; else return `NA` (default `FALSE`).}

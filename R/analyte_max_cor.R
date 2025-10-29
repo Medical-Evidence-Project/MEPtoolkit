@@ -1,17 +1,3 @@
-# ============================================================
-# analyte_max_cor: cohesive data-frame output + one printer
-# ============================================================
-
-# -----------------------------
-# Internal helper (not exported)
-# -----------------------------
-
-#' @keywords internal
-#' @noRd
-.strip_key <- function(x) {
-  tolower(gsub("\\s+", " ", trimws(gsub("[^[:alnum:] ]+"," ", x))))
-}
-
 #' R6 Class representing the results from an analyte_max_cor_res call
 #'
 #' @description
@@ -165,18 +151,14 @@ Analyte_max_cor_res <- R6::R6Class("Analyte_max_cor_res",
 #' @param data Optional data.frame providing columns for analyte, m1, s1, m2, s2.
 #' @param append Logical. If \code{TRUE} and \code{data} provided, append ceilings as columns.
 #' @param out_cols Length-7 character vector: names for analytic-only and total ceilings.
-#'   Defaults to \code{c("r_max_analytic","r_max_total")}.
+#'   Defaults to \code{c("cvi", "cva", "cvt", "cvw", "cvg", "r_max_analytic","r_max_total")}.
 #' @param output Logical. If \code{TRUE}, also outputs a summary of results in the console.
 #'
 #' @return
 #' \itemize{
-#'   \item Single case (no \code{data}, \code{append = FALSE}): an object of class
-#'         \code{"analyte_max_cor"} with detailed components and a pretty printer.
-#'   \item Multiple cases, \code{append = FALSE}: a data.frame with columns
-#'         \code{case}, \code{analyte}, \code{cvi}, \code{cva}, \code{cvt}, \code{cvw}, \code{cvg},
-#'         \code{r_max_analytic}, \code{r_max_total}. It is tagged so that
-#'         \code{print.analyte_max_cor()} prints a compact table.
-#'   \item Multiple cases, \code{append = TRUE}: the input \code{data} with two new columns
+#'   \item if no \code{data} or \code{append = FALSE}: an object of class
+#'         \code{"Analyte_max_cor_res"} with detailed components and a pretty printer.
+#'   \item if \code{append = TRUE}: the input \code{data} with two new columns
 #'         named by \code{out_cols}.
 #' }
 #'

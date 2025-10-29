@@ -1,21 +1,3 @@
-#' @keywords internal
-#' @noRd
-resolve <- function(expr, data) {
-  if(quo_is_null(expr)) {
-    return(NULL)
-  }
-  vars <- names(data)
-  if(as_string(ensym(expr)) %in% vars) {
-    return(data %>% pull(!!expr))
-  }
-  else if(is.null(eval_tidy(expr))) {
-    return(NULL)
-  }
-  else {
-    stop(sprintf("Column `%s` not found in `data`", as_string(ensym(expr))))
-  }
-}
-
 #' Compute a paired (pre–post) correlation from summary statistics
 #'
 #' @description
@@ -67,7 +49,7 @@ resolve <- function(expr, data) {
 #' @param p  Character or column name. Two-sided \emph{p} (used when `sc` and `t` missing). Character in `prepost_r()`; numeric allowed in `_RIVET`.
 #' @param data Optional `data.frame`. If provided, arguments are evaluated within it.
 #' @param append Logical. If `TRUE` with `data`, append output columns; else return a data frame of results.
-#' @param out_col_min,out_col_mid,out_col_max Character. Output column names when `append = TRUE`
+#' @param out_cols Character vector. Output column names when `append = TRUE`
 #'   (defaults: `"rho_prepost_min"`, `"rho_prepost"`, `"rho_prepost_max"`).
 #' @param out_col (legacy, `_RIVET` only) Character. Single output column name (default `"rho_prepost"`).
 #' @param strict Logical. If `TRUE`, error out on underspecified rows; else return `NA` (default `FALSE`).
@@ -110,9 +92,9 @@ prepost_r <- function(s1, s2, sc = NULL, mc = NULL,
                       m1 = NULL, m2 = NULL, n = NULL,
                       t = NULL, p = NULL,
                       data = NULL, append = FALSE,
-                      out_col_min = "rho_prepost_min",
-                      out_col_mid = "rho_prepost",
-                      out_col_max = "rho_prepost_max",
+                      out_cols = c("rho_prepost_min",
+                                   "rho_prepost",
+                                   "rho_prepost_max"),
                       strict = FALSE, warn = TRUE) {
 
   if(!is.null(data)) {
@@ -271,9 +253,9 @@ prepost_r <- function(s1, s2, sc = NULL, mc = NULL,
   )
 
   if (append && !is.null(data)) {
-    data[[out_col_min]] <- out_df$rho_prepost_min
-    data[[out_col_mid]] <- out_df$rho_prepost
-    data[[out_col_max]] <- out_df$rho_prepost_max
+    data[[out_cols[1]]] <- out_df$rho_prepost_min
+    data[[out_cols[2]]] <- out_df$rho_prepost
+    data[[out_cols[3]]] <- out_df$rho_prepost_max
     return(data)
   }
   out_df

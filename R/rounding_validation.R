@@ -4,11 +4,12 @@
 #' examine
 #' @return The number of decimal places
 #' @examples
-#' decimal_places("3")
-#' decimal_places(".984")
-#' decimal_places("2.00")
-#' decimal_places(c("3.14", NA, "6.8"))
-decimal_places <- function(statistic) {
+#' decimal_place("3")
+#' decimal_place(".984")
+#' decimal_place("2.00")
+#' decimal_place(c("3.14", NA, "6.8"))
+#' @export
+decimal_place <- function(statistic) {
   vapply(statistic, FUN.VALUE = integer(1), function(elem) {
     if (is.na(elem)) return(NA_integer_)
     if (grepl("\\.", elem)) {
@@ -35,6 +36,7 @@ decimal_places <- function(statistic) {
 #' validate_descriptive("2.14")
 #' validate_descriptive(c("2.14", "3.2"))
 #' validate_descriptive(c("2.14", NA, "3.2"), allow_na = TRUE)
+#' @export
 validate_descriptive <- function (statistic, allow_na = FALSE)
 {
   name <- substitute(statistic)
@@ -55,7 +57,7 @@ validate_descriptive <- function (statistic, allow_na = FALSE)
     stop(paste(name, "must be parseable as numeric (or NA)."))
   }
 
-  dp <- decimal_places(statistic)
+  dp <- decimal_place(statistic)
 
   statistic_range <- list(
     minimum = statistic_num - 5*10^(-dp-1),
@@ -78,6 +80,7 @@ validate_descriptive <- function (statistic, allow_na = FALSE)
 #' @examples
 #' validate_p(".14")
 #' validate_p(c(".14", "<.001", NA, ".58"), allow_na = TRUE)
+#' @export
 validate_p <- function(p, allow_na = FALSE)
 {
   name <- substitute(p)
@@ -111,7 +114,7 @@ validate_p <- function(p, allow_na = FALSE)
     stop(paste(name, "values must be between 0 and 1."))
   }
 
-  dp <- decimal_places(numeric_parts)
+  dp <- decimal_place(numeric_parts)
 
   p_range <- list(
     minimum = ifelse(grepl("<", p, fixed = TRUE),
