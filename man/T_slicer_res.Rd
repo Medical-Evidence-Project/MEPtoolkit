@@ -33,7 +33,7 @@ test?}
 \item{\code{Welch}}{are statistics consistent with a Welch's t
 test?}
 
-\item{\code{Plot}}{the resulting plot}
+\item{\code{Plots}}{the resulting plot}
 }
 \if{html}{\out{</div>}}
 }
@@ -61,7 +61,7 @@ Create a new T_slicer_res object
   Welch_max,
   Student,
   Welch,
-  Plot
+  Plots
 )}\if{html}{\out{</div>}}
 }
 
@@ -84,7 +84,9 @@ Create a new T_slicer_res object
 
 \item{\code{Welch}}{Welch}
 
-\item{\code{Plot}}{Plot}
+\item{\code{Plots}}{Plots}
+
+\item{\code{n}}{n}
 }
 \if{html}{\out{</div>}}
 }
@@ -98,19 +100,35 @@ A new `T_slicer_res` object
 \subsection{Method \code{print()}}{
 Pretty printing of t_slicer results
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{T_slicer_res$print()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{T_slicer_res$print(n = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{n}}{if NULL (default), outputs results for all
+lines. Otherwise, only the one from the specified line.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-T_slicer_res-plot"></a>}}
 \if{latex}{\out{\hypertarget{method-T_slicer_res-plot}{}}}
 \subsection{Method \code{plot()}}{
-Plots the results
+Plots the results.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{T_slicer_res$plot()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{T_slicer_res$plot(n = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{n}}{if NULL (default), plots a grid of all graphs for all
+lines. Otherwise, plots the graph for the specified line.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-T_slicer_res-clone"></a>}}

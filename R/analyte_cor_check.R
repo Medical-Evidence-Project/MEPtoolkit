@@ -319,13 +319,8 @@ analyte_cor_check <- function(
   }
 
   # -- check lengths
-  args <- list(analyte = analyte, m1 = m1, s1 = s1, m2 = m2, s2 = s2, n = n,
-               r_obs = r_obs, sc = sc, mc = mc, t = t, p= p)
-  lens <- vapply(args, length, integer(1))
-  L <- max(lens)
-  ok_len <- lens == 0 | lens == L
-  if (!all(ok_len))
-    stop("arguments must have the same length.")
+  L <- length_check(list(analyte = analyte, m1 = m1, s1 = s1, m2 = m2, s2 = s2,
+                         n = n, r_obs = r_obs, sc = sc, mc = mc, t = t, p = p))
 
   if (is.null(n) || any(is.na(n)))
     stop("Sample size `n` must be provided.")

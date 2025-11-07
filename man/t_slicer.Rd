@@ -4,39 +4,43 @@
 \alias{t_slicer}
 \title{Slice t tests}
 \usage{
-t_slicer(m1, s1, n1, m2, s2, n2, p, output = FALSE)
+t_slicer(m1, s1, n1, m2, s2, n2, p = NULL, data = NULL, output = FALSE)
 }
 \arguments{
-\item{m1}{A character string. The reported mean of the first group}
+\item{m1}{A character vector. The reported mean of the first group}
 
-\item{s1}{A character string. The reported standard deviation of the first group}
+\item{s1}{A character vector. The reported standard deviation of the first group}
 
-\item{n1}{A number. The sample size of the first group}
+\item{n1}{A numeric vector. The sample size of the first group}
 
-\item{m2}{A character string. The reported mean of the second group}
+\item{m2}{A character vector. The reported mean of the second group}
 
-\item{s2}{character string. The reported standard deviation of the second group}
+\item{s2}{A character vector. The reported standard deviation of the second group}
 
-\item{n2}{A number. The sample size of the second group}
+\item{n2}{A numeric vector The sample size of the second group}
 
-\item{p}{A character string. The reported p value}
+\item{p}{(Optional) A character vector. The reported p value}
+
+\item{data}{A dataframe. If provided, m1, s1, n1, m2, s2, n2 and p are the
+column names inside this dataframe.}
 
 \item{output}{A logical. Optional (default = FALSE). Determines if the
-function should print and plot its output before returning it}
+function should print + plot its output before returning it}
 }
 \value{
 A T_slicer_res object. Contains logicals to represent the consistency
-of inputs with both tests, min/max/RIVETS p values, and a plot
+of inputs with both tests (if p values were given), min/max/RIVETS p values,
+pretty printing and a plot
 }
 \description{
 Checks if a t test could be a Welch or a Student test (useful for cases
 when it is not explicitly stated)
 }
 \details{
-t_slicer takes as input 2 sets of descriptive statistics (mean and sd)
-and a reported p value. It computes the results of the Student's and Welch's
-t tests, and compares the resulting with the reported p values to see which
-test(s) - if any - match(es)
+t_slicer takes as input 2 sets of descriptive statistics (means and sds)
+and (optionally) reported p values. It computes the results of the Student's
+and Welch's t tests, and compares the resulting with the reported p values
+(if provided) to see which test(s) - if any - match(es)
 
 It takes into account the rounding (im)precision, and therefore
 works with ranges of possible values. It assumes that reported values could
@@ -46,6 +50,10 @@ Plots a graph on top of the return value
 }
 \examples{
 t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08", TRUE)
-t_slicer("1.2", "1.2", 60, "2.1", "2.5", 60, ".02", TRUE)
+data <- tibble(m1 = c("1.20", "1.25"), s1 = c("1.2", "1.25"), n1 = c(60, 60),
+               m2 = c("2.1", "2.15"), s2 = c("2.5", "2.55"), n2 = c(30, 30),
+               p = c(NA, NA))
+t_slicer(m1 = m1, s1 = s1, n1 = n1, m2 = m2, s2 = s2, n2 = n2,
+         data = data, output = TRUE)
 
 }

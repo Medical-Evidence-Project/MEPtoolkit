@@ -21,3 +21,14 @@ resolve <- function(expr, data) {
 .strip_key <- function(x) {
   tolower(gsub("\\s+", " ", trimws(gsub("[^[:alnum:] ]+"," ", x))))
 }
+
+#' @keywords internal
+#' @noRd
+length_check <- function(args) {
+  lens <- vapply(args, length, integer(1))
+  L <- max(lens)
+  ok_len <- lens == 0 | lens == L
+  if (!all(ok_len))
+    stop("Non-NULL arguments must have the same length.")
+  return(L)
+}
