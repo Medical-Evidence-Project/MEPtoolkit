@@ -198,12 +198,7 @@ analyte_max_cor <- function(analyte,
   }
 
   # -- check lengths
-  args <- list(s1=s1, s2=s2, m1=m1, m2=m2, analyte=analyte)
-  lens <- vapply(args, length, integer(1))
-  L <- max(lens)
-  ok_len <- lens == 0 | lens == L
-  if (!all(ok_len))
-    stop("analyte, m1, s1, m2 & s2 must have the same length.")
+  L <- length_check(list(s1=s1, s2=s2, m1=m1, m2=m2, analyte=analyte))
 
   a_disp <- character(L)
   cvi <- cva <- cvt <- cvw <- cvg <- rA <- rT <- rep(NA_real_, L)

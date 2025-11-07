@@ -188,3 +188,15 @@ test_that("A few calculations are correct", {
   expect_equal(round(df$rho_prepost, 3), 0.361)
   expect_equal(round(df$rho_prepost_max, 3), 0.516)
 })
+
+test_that("Just a simple test for the legacy RIVET version", {
+  df <- data.frame(s1 = c("1.05"),
+                   s2 = c("1.03"),
+                   m1 = c("-0.09"),
+                   m2 = c("-0.01"),
+                   p = c("0.498"),
+                   n = c(100))
+  res <- prepost_r_RIVETS(data = df, s1 = s1, s2 = s2, m1 = m1, m2 = m2,
+                  n = n, p = p)
+  expect_equal(res, 0.360567594)
+})

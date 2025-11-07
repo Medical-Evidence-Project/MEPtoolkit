@@ -33,3 +33,21 @@ test_that("A result in different scenarios", {
   )
   expect_equal(out$prob_total, 0.843225136)
 })
+
+test_that("Outputs behave normally", {
+  df <- tibble(analyte = "Sodium",
+               m1 = "140.2",
+               s1 = "2.10",
+               m2 = "139.8",
+               s2 = "2.05",
+               n = 60,
+               t = "2.50")
+  expect_output(out <- analyte_cor_check(
+    analyte = "Sodium",
+    m1 = "140.2", s1 = "2.10",
+    m2 = "139.8", s2 = "2.05",
+    n = 60, t = "2.50",
+    k = 1, use = "pre",
+    output = TRUE
+  ))
+})

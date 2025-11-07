@@ -25,3 +25,9 @@ test_that(".strip_key works on a few scenarios", {
   expect_equal(.strip_key("   analyte"), "analyte")
   expect_equal(.strip_key("   ANALYTE    "), "analyte")
 })
+
+test_that("length_check works correctly", {
+  expect_equal(length_check(list(a=c(1,2), b=c(3,4))), 2)
+  expect_equal(length_check(list(a=c(1,2), b=NULL)), 2)
+  expect_error(length_check(list(a=c(1,2), b=c(3))), "Non-NULL arguments must have the same length.")
+})

@@ -116,12 +116,7 @@ prepost_r <- function(s1, s2, sc = NULL, mc = NULL,
     stop("`s1` and `s2` must be non-null.")
 
   # -- check lengths
-  args <- list(s1=s1, s2=s2, sc=sc, mc=mc, m1=m1, m2=m2, n=n, t=t, p=p)
-  lens <- vapply(args, length, integer(1))
-  L <- max(lens)
-  ok_len <- lens == 0 | lens == L
-  if (!all(ok_len))
-    stop("Non-NULL arguments must have the same length.")
+  L <- length_check(list(s1=s1, s2=s2, sc=sc, mc=mc, m1=m1, m2=m2, n=n, t=t, p=p))
 
   s1 <- validate_descriptive(s1, allow_na = TRUE)
   s2 <- validate_descriptive(s2, allow_na = TRUE)
