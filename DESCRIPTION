@@ -21,5 +21,6 @@ Imports:
     dplyr,
     rlang,
     BSDA,
-    ggnewscale
+    ggnewscale,
+    cowplot
 Config/testthat/edition: 3

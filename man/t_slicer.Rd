@@ -49,10 +49,10 @@ have been rounded up or down
 Plots a graph on top of the return value
 }
 \examples{
-t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08", TRUE)
-data <- tibble(m1 = c("1.20", "1.25"), s1 = c("1.2", "1.25"), n1 = c(60, 60),
-               m2 = c("2.1", "2.15"), s2 = c("2.5", "2.55"), n2 = c(30, 30),
-               p = c(NA, NA))
+t_slicer("1.2", "1.2", 60, "2.1", "2.5", 30, ".08", output = TRUE)
+data <- data.frame(m1 = c("1.20", "1.25"), s1 = c("1.2", "1.25"), n1 = c(60, 60),
+                   m2 = c("2.1", "2.15"), s2 = c("2.5", "2.55"), n2 = c(30, 30),
+                   p = c(NA, NA))
 t_slicer(m1 = m1, s1 = s1, n1 = n1, m2 = m2, s2 = s2, n2 = n2,
          data = data, output = TRUE)
 
